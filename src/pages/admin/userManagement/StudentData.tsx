@@ -10,6 +10,7 @@ import { useState } from "react";
 import { TQueryParam } from "../../../types/global.type";
 import { TStudent } from "../../../types";
 import { useGetAllStudentQuery } from "../../../redux/features/admin/userManagement.api";
+import { Link } from "react-router-dom";
 
 export type TTableData = Pick<
   TStudent,
@@ -51,14 +52,26 @@ const StudentData = () => {
       dataIndex: "id",
     },
     {
+      title: "Email",
+      key: "email",
+      dataIndex: "email",
+    },
+    {
+      title: "Contact N.",
+      key: "contactNo",
+      dataIndex: "contactNo",
+    },
+    {
       title: "Action",
       key: "x",
-      render: () => {
+      render: (item) => {
         return (
           <Space>
+            <Link to={`/admin/student-data/${item.key}`}>
+              <Button>Details</Button>
+            </Link>
             <Button>Update</Button>
-            <Button>Update</Button>
-            <Button>Update</Button>
+            <Button>Block</Button>
           </Space>
         );
       },
