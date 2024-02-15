@@ -1,4 +1,4 @@
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../components/form/PHForm";
 import PHInput from "../../../components/form/PHInput";
 import { Button, Col, Divider, Form, Input, Row } from "antd";
@@ -9,12 +9,13 @@ import {
   useGetAcademicDepartmentsQuery,
   useGetAllSemestersQuery,
 } from "../../../redux/features/admin/academicManagement.api";
+import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
 
 //! This is only for development
 //! Should be removed
 const studentDefaultValues = {
   name: {
-    firstName: "I am ",
+    firstName: "Jahid",
     middleName: "Student",
     lastName: "Number 1",
   },
@@ -43,18 +44,21 @@ const studentDefaultValues = {
     address: "789 Pine St, Villageton",
   },
 
-  admissionSemester: "65bb60ebf71fdd1add63b1c0",
-  academicDepartment: "65b4acae3dc8d4f3ad83e416",
+  // admissionSemester: "65bb60ebf71fdd1add63b1c0",
+  // academicDepartment: "65b4acae3dc8d4f3ad83e416",
 };
 
 const CreateStudent = () => {
+  const [addStudent, { data, error }] = useAddStudentMutation();
+
+  console.log("studentMutationData--=>", data);
+  console.log("studentMutationError--=>", error);
+
   const { data: sData, isLoading: sIsLoading } =
     useGetAllSemestersQuery(undefined);
-  console.log("allSemesterData--=>", sData);
 
   const { data: dData, isLoading: dIsLoading } =
     useGetAcademicDepartmentsQuery(undefined);
-  console.log("academicDepartmentData--=>", dData);
 
   const semesterOptions = sData?.data?.map((item) => ({
     value: item._id,
@@ -66,11 +70,18 @@ const CreateStudent = () => {
     label: item.name,
   }));
 
-  const formData = new FormData();
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    // console.log(data);
-    formData.append("data", JSON.stringify(data));
+    console.log("data---=>", data);
+    const studentData = {
+      password: "jahid00@11",
+      student: data,
+    };
 
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(studentData));
+    formData.append("file", data.image);
+
+    addStudent(formData);
     //! This is for development
     // console.log([...formData.entries()]);
     // console.log(Object.fromEntries(formData));
@@ -105,7 +116,7 @@ const CreateStudent = () => {
                 label="Blood group"
               />
             </Col>
-            {/* <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <Controller
                 name="image"
                 render={({ field: { onChange, value, ...field } }) => (
@@ -119,7 +130,7 @@ const CreateStudent = () => {
                   </Form.Item>
                 )}
               />
-            </Col> */}
+            </Col>
           </Row>
           <Divider>Contact Info.</Divider>
           <Row gutter={8}>
