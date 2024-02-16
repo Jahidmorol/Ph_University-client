@@ -20,7 +20,7 @@ const Login = () => {
   // });
 
   const defaultValues = {
-    id: "A-0001",
+    id: "2025010001",
     password: "phuniversity00@11",
   };
 
