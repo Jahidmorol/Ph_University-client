@@ -60,11 +60,11 @@ const academicManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
-    assignFaculties: builder.mutation({
-      query: (args) => ({
-        url: `courses/${args.courseId}/assign-faculties`,
-        method: "PUT",
-        body: args.data,
+    changePassword: builder.mutation({
+      query: (data) => ({
+        url: "/auth/change-password",
+        method: "POST",
+        body: data,
       }),
     }),
   }),
@@ -74,5 +74,5 @@ export const {
   useAddStudentMutation,
   useGetAllStudentQuery,
   useGetAllFacultiesQuery,
-  useAssignFacultiesMutation,
+  useChangePasswordMutation,
 } = academicManagementApi;

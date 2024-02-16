@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Modal, Table } from "antd";
-import { useGetAllCoursesQuery } from "../../../redux/features/admin/courseManagement.api";
-import { useState } from "react";
 import {
   useAssignFacultiesMutation,
-  useGetAllFacultiesQuery,
-} from "../../../redux/features/admin/userManagement.api";
+  useGetAllCoursesQuery,
+} from "../../../redux/features/admin/courseManagement.api";
+import { useState } from "react";
+import { useGetAllFacultiesQuery } from "../../../redux/features/admin/userManagement.api";
 import PHForm from "../../../components/form/PHForm";
 import PHSelect from "../../../components/form/PHSelect";
 import { FieldValues, SubmitHandler } from "react-hook-form";
