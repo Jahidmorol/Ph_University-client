@@ -16,7 +16,7 @@ const MainLayout = () => {
     <Layout style={{ height: "100%" }}>
       <Sidebar />
       <Layout>
-        <Header>
+        <Header style={{ textAlign: "right" }}>
           <Button onClick={handleLogout}>Logout</Button>
         </Header>
         <Content style={{ margin: "24px 16px 0" }}>
