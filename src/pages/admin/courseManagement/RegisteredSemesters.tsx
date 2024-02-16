@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Dropdown, Table, TableColumnsType, Tag } from "antd";
 import {
   useGetAllRegisteredSemestersQuery,
@@ -40,7 +41,7 @@ const RegisteredSemesters = () => {
     })
   );
 
-  const handleStatusUpdate = (data) => {
+  const handleStatusUpdate = (data: any) => {
     const updateData = {
       id: semesterId,
       data: {
