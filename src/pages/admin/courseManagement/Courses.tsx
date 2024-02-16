@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Modal, Table } from "antd";
 import { useGetAllCoursesQuery } from "../../../redux/features/admin/courseManagement.api";
 import { useState } from "react";
@@ -7,6 +8,9 @@ import {
 } from "../../../redux/features/admin/userManagement.api";
 import PHForm from "../../../components/form/PHForm";
 import PHSelect from "../../../components/form/PHSelect";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+
+type TItemData = { key: string; title: string; code: "string" };
 
 const Courses = () => {
   const { data: courses, isFetching } = useGetAllCoursesQuery(undefined);
@@ -31,7 +35,7 @@ const Courses = () => {
     {
       title: "Action",
       key: "x",
-      render: (item) => {
+      render: (item: TItemData) => {
         return <AddFacultyModal facultyInfo={item} />;
       },
     },
@@ -47,25 +51,29 @@ const Courses = () => {
   );
 };
 
-const AddFacultyModal = ({ facultyInfo }) => {
+type TFacultyModalProps = {
+  facultyInfo: TItemData;
+};
+const AddFacultyModal: React.FC<TFacultyModalProps> = ({ facultyInfo }) => {
   console.log("facultyInfo---=>", facultyInfo);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: facultiesData } = useGetAllFacultiesQuery(undefined);
   const [assignFaculties] = useAssignFacultiesMutation();
 
-  const facultiesOption = facultiesData?.data?.map((item) => ({
+  const facultiesOption = facultiesData?.data?.map((item: any) => ({
     value: item._id,
     label: item.fullName,
   }));
 
-  const handleSubmit = (data) => {
+  const handleSubmit: SubmitHandler<FieldValues> = (data) => {
     const facultyData = {
       courseId: facultyInfo.key,
       data,
     };
 
     assignFaculties(facultyData);
+    setIsModalOpen(false);
   };
 
   const showModal = () => {

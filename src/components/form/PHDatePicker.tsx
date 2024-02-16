@@ -1,19 +1,24 @@
-import { DatePicker, Form } from "antd";
+import { Form, TimePicker } from "antd";
 import { Controller } from "react-hook-form";
 
-type TDatePickerProps = {
+type TTimePickerProps = {
   name: string;
   label?: string;
 };
 
-const PHDatePicker = ({ name, label }: TDatePickerProps) => {
+const PHTimePicker = ({ name, label }: TTimePickerProps) => {
   return (
     <div style={{ marginBottom: "20px" }}>
       <Controller
         name={name}
         render={({ field }) => (
           <Form.Item label={label}>
-            <DatePicker {...field} size="large" style={{ width: "100%" }} />
+            <TimePicker
+              {...field}
+              size="large"
+              style={{ width: "100%" }}
+              format="HH:mm"
+            />
           </Form.Item>
         )}
       />
@@ -21,4 +26,4 @@ const PHDatePicker = ({ name, label }: TDatePickerProps) => {
   );
 };
 
-export default PHDatePicker;
+export default PHTimePicker;
