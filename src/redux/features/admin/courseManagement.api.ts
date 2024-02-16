@@ -1,3 +1,4 @@
+import { TSemester } from "../../../types";
 import { TQueryParam, TResponseRedux } from "../../../types/global.type";
 import { baseApi } from "../../api/baseApi";
 
@@ -20,7 +21,7 @@ const courseManagementApi = baseApi.injectEndpoints({
         };
       },
 
-      transformResponse: (response: TResponseRedux<any>) => {
+      transformResponse: (response: TResponseRedux<TSemester[]>) => {
         return {
           data: response.data,
           meta: response.meta,
@@ -34,10 +35,18 @@ const courseManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    updateRegisteredSemester: builder.mutation({
+      query: (args) => ({
+        url: `/semester-registrations/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+    }),
   }),
 });
 
 export const {
   useAddRegisteredSemesterMutation,
   useGetAllRegisteredSemestersQuery,
+  useUpdateRegisteredSemesterMutation,
 } = courseManagementApi;
