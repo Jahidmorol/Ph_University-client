@@ -27,6 +27,35 @@ export type TStudent = {
   fullName: string;
 };
 
+export type TFaculty = {
+  _id: string;
+  id: string;
+  user: TUser;
+  designation: string;
+  name: TName;
+  gender: string;
+  dateOfBirth: string;
+  email: string;
+  contactNo: string;
+  emergencyContactNo: string;
+  bloodGroup: string;
+  presentAddress: string;
+  permanentAddress: string;
+  profileImg: string;
+  academicDepartment: string;
+  academicFaculty: string;
+  isDeleted: boolean;
+  __v: number;
+  fullName: string;
+};
+
+export type TCourseFaculties = {
+  _id: string;
+  __v: number;
+  course: string;
+  faculties: TFaculty[];
+};
+
 export type TUser = {
   _id: string;
   id: string;

@@ -1,4 +1,4 @@
-import { TCourse, TSemester } from "../../../types";
+import { TCourse, TCourseFaculties, TSemester } from "../../../types";
 import { TQueryParam, TResponseRedux } from "../../../types/global.type";
 import { baseApi } from "../../api/baseApi";
 
@@ -84,7 +84,7 @@ const courseManagementApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
-      transformResponse: (response: TResponseRedux<any>) => {
+      transformResponse: (response: TResponseRedux<TCourseFaculties>) => {
         return {
           data: response.data,
           meta: response.meta,
