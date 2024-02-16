@@ -61,13 +61,13 @@ const courseManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      providesTags: ["courses"],
       transformResponse: (response: TResponseRedux<TCourse[]>) => {
         return {
           data: response.data,
           meta: response.meta,
         };
       },
+      providesTags: ["courses"],
     }),
     addCourse: builder.mutation({
       query: (data) => ({
@@ -75,7 +75,7 @@ const courseManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      //   invalidatesTags: ["courses"],
+      invalidatesTags: ["courses"],
     }),
   }),
 });
