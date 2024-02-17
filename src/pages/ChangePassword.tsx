@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Row } from "antd";
 import PHForm from "../components/form/PHForm";
 import PHInput from "../components/form/PHInput";
@@ -18,7 +19,6 @@ const ChangePassword = () => {
     console.log(data);
 
     const res = (await changePassword(data)) as TResponse<any>;
-    console.log(res?.data?.success);
     if (res?.data?.success) {
       dispatch(logout());
       navigate("/login");
