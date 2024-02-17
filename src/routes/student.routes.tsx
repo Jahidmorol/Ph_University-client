@@ -1,4 +1,4 @@
-import OfferedCourse from "../pages/student/OfferedCourse";
+import OfferedCourse from "../pages/student/MyOfferedCourse";
 import StudentDashboard from "../pages/student/StudentDashboard";
 
 const studentPaths = [
