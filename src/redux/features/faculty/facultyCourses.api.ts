@@ -20,7 +20,6 @@ const facultyCourseApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      providesTags: ["offeredCourse"],
       transformResponse: (response: TResponseRedux<any>) => {
         return {
           data: response.data,
