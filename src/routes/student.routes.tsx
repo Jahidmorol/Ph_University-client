@@ -12,6 +12,11 @@ const studentPaths = [
     path: "offered-course",
     element: <OfferedCourse />,
   },
+  {
+    name: "My Schedule",
+    path: "schedule",
+    element: <OfferedCourse />,
+  },
 ];
 
 export default studentPaths;

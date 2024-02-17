@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Row } from "antd";
-import { useGetMyOfferedCoursesQuery } from "../../redux/features/student/studentCourseManagement.api";
+import {
+  useEnrolCourseMutation,
+  useGetMyOfferedCoursesQuery,
+} from "../../redux/features/student/studentCourseManagement.api";
 
 type TCourse = {
   [index: string]: any;
@@ -8,10 +11,12 @@ type TCourse = {
 
 const MyOfferedCourse = () => {
   const { data: offeredCourseData } = useGetMyOfferedCoursesQuery(undefined);
+  const [enroll] = useEnrolCourseMutation();
 
   const singleObject = offeredCourseData?.data?.reduce((acc: TCourse, item) => {
     const key = item.course.title;
     acc[key] = acc[key] || { courseTitle: key, sections: [] };
+
     acc[key].sections.push({
       section: item.section,
       _id: item._id,
@@ -24,6 +29,15 @@ const MyOfferedCourse = () => {
   }, {});
 
   const modifiedData = Object.values(singleObject ? singleObject : {});
+
+  const handleEnroll = async (id: string) => {
+    const enrollData = {
+      offeredCourse: id,
+    };
+
+    const res = await enroll(enrollData);
+    console.log(res);
+  };
 
   if (!modifiedData.length) {
     return <p>No available courses</p>;
@@ -54,7 +68,9 @@ const MyOfferedCourse = () => {
                     </Col>
                     <Col span={5}>Start Time: {section.startTime} </Col>
                     <Col span={5}>End Time: {section.endTime} </Col>
-                    <Button>Enroll</Button>
+                    <Button onClick={() => handleEnroll(section._id)}>
+                      Enroll
+                    </Button>
                   </Row>
                 );
               })}
