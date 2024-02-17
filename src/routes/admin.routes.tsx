@@ -15,7 +15,7 @@ import SemesterRegistration from "../pages/admin/courseManagement/SemesterRegist
 import RegisteredSemesters from "../pages/admin/courseManagement/RegisteredSemesters";
 import Courses from "../pages/admin/courseManagement/Courses";
 import OfferCourse from "../pages/admin/courseManagement/OfferCourse";
-import OfferedCourse from "../pages/faculty/OfferedCourse";
+import OfferedCourses from "../pages/admin/courseManagement/OfferedCourses";
 
 export const adminPaths = [
   {
@@ -118,7 +118,7 @@ export const adminPaths = [
       {
         name: "Offered Courses",
         path: "offered-courses",
-        element: <OfferedCourse />,
+        element: <OfferedCourses />,
       },
     ],
   },

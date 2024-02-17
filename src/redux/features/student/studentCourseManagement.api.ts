@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TQueryParam, TResponseRedux } from "../../../types/global.type";
 import { TOfferedCourse } from "../../../types/studentCourse.type";
 import { baseApi } from "../../api/baseApi";
