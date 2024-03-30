@@ -39,6 +39,7 @@ const Sidebar = () => {
     default:
       break;
   }
+
   return (
     <Sider
       breakpoint="lg"
